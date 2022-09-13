@@ -15,7 +15,7 @@ AWS CodeDeploy is a deployment service that automates application deployments to
 Amazon EC2 instances, on-premises instances, serverless Lambda functions, or
 Amazon ECS services.
 
-The CDK currently supports Amazon EC2, on-premise, and AWS Lambda applications.
+The CDK currently supports Amazon EC2, on-premise, AWS Lambda, and Amazon ECS applications.
 
 ## EC2/on-premise Applications
 
@@ -331,6 +331,62 @@ To import an already existing Deployment Config:
 
 ```ts
 const deploymentConfig = codedeploy.LambdaDeploymentConfig.fromLambdaDeploymentConfigName(
+  this,
+  'ExistingDeploymentConfiguration',
+  'MyExistingDeploymentConfiguration',
+);
+```
+
+## ECS Applications
+
+To create a new CodeDeploy Application that deploys an ECS service:
+
+```ts
+const application = new codedeploy.EcsApplication(this, 'CodeDeployApplication', {
+  applicationName: 'MyApplication', // optional property
+});
+```
+
+To import an already existing Application:
+
+```ts
+const application = codedeploy.EcsApplication.fromEcsApplicationName(
+  this,
+  'ExistingCodeDeployApplication',
+  'MyExistingApplication',
+);
+```
+
+## ECS Deployment Configurations
+
+CodeDeploy for ECS comes with built-in configurations for traffic shifting.
+If you want to specify your own strategy,
+you can do so with the EcsDeploymentConfig construct,
+letting you specify precisely how fast an ECS service is deployed.
+
+```ts
+new codedeploy.EcsDeploymentConfig(this, 'CustomConfig', {
+  type: codedeploy.EcsDeploymentConfigType.CANARY,
+  interval: Duration.minutes(1),
+  percentage: 5,
+});
+```
+
+You can specify a custom name for your deployment config, but if you do you will not be able to update the interval/percentage through CDK.
+
+```ts
+const config = new codedeploy.EcsDeploymentConfig(this, 'CustomConfig', {
+  type: codedeploy.EcsDeploymentConfigType.CANARY,
+  interval: Duration.minutes(1),
+  percentage: 5,
+  deploymentConfigName: 'MyDeploymentConfig',
+});
+```
+
+Or import an existing one:
+
+```ts
+const deploymentConfig = codedeploy.EcsDeploymentConfig.fromEcsDeploymentConfigName(
   this,
   'ExistingDeploymentConfiguration',
   'MyExistingDeploymentConfiguration',
