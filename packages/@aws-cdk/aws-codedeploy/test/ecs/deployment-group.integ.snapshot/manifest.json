@@ -1,0 +1,369 @@
+{
+  "version": "21.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "aws-cdk-codedeploy-ecs.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "aws-cdk-codedeploy-ecs.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "aws-cdk-codedeploy-ecs": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "aws-cdk-codedeploy-ecs.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d213f903e815d097cc385045a55f09fab152d9d8278f842ac8631587fcd21598.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "aws-cdk-codedeploy-ecs.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "aws-cdk-codedeploy-ecs.assets"
+      ],
+      "metadata": {
+        "/aws-cdk-codedeploy-ecs/VPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCB9E5F0B4"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet1SubnetB4246D30"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet1RouteTableFEE4B781"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet1RouteTableAssociation0B0896DC"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet1DefaultRoute91CEF279"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet1EIP6AD938E8"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet1NATGatewayE0556630"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet2Subnet74179F39"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet2RouteTable6F1A15F1"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet2RouteTableAssociation5A808732"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet2DefaultRouteB7481BBA"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet2EIP4947BC00"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPublicSubnet2NATGateway3C070193"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet1Subnet8BCA10E0"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet1RouteTableBE8A6027"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet1RouteTableAssociation347902D1"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet1DefaultRouteAE1D6490"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet2SubnetCFCDAA7A"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet2RouteTable0A19E10E"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet2RouteTableAssociation0C73D413"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCPrivateSubnet2DefaultRouteF4F5CFD2"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCIGWB7E252D3"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/VPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCVPCGW99B986DC"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceSecurityGroup61DE1A49"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceSecurityGroup/from awscdkcodedeployecsServiceLBSecurityGroup25574A14:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceSecurityGroupfromawscdkcodedeployecsServiceLBSecurityGroup25574A1480FD0A3249"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/EcsCluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsCluster97242B84"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/TaskDef/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefTaskRole1EDB4A67"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/TaskDef/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDef54694570"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/FargateService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FargateServiceAC2B3B85"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBBDAD0B9B"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBSecurityGroup2EA7EDA1"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/SecurityGroup/to awscdkcodedeployecsServiceSecurityGroupCD76F745:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBSecurityGrouptoawscdkcodedeployecsServiceSecurityGroupCD76F74580EDAAA915"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/ProdListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBProdListener0E7627EE"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/ProdListener/BlueTGGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBProdListenerBlueTGGroupB47699CD"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/TestListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBTestListener3EA49939"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/ServiceLB/TestListener/GreenTGGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBTestListenerGreenTGGroup3232572A"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/BlueUnhealthyHosts/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BlueUnhealthyHosts48919A97"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/Blue5xx/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Blue5xx7E9798A6"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/GreenUnhealthyHosts/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GreenUnhealthyHosts8D9D09C1"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/Green5xx/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Green5xx1A511A06"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/BlueGreenDG/Application/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BlueGreenDGApplication3649479D"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/BlueGreenDG/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BlueGreenDGServiceRole33E3BCAC"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/BlueGreenDG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BlueGreenDG373AB9B0"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/Service-principalMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceprincipalMap"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/aws-cdk-codedeploy-ecs/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "aws-cdk-codedeploy-ecs"
+    },
+    "EcsDeploymentGroupTestDefaultTestDeployAssert60AABFA0.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "EcsDeploymentGroupTestDefaultTestDeployAssert60AABFA0.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "EcsDeploymentGroupTestDefaultTestDeployAssert60AABFA0": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "EcsDeploymentGroupTestDefaultTestDeployAssert60AABFA0.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21fbb51d7b23f6a6c262b46a9caee79d744a3ac019fd45422d988b96d44b2a22.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "EcsDeploymentGroupTestDefaultTestDeployAssert60AABFA0.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "EcsDeploymentGroupTestDefaultTestDeployAssert60AABFA0.assets"
+      ],
+      "metadata": {
+        "/EcsDeploymentGroupTest/DefaultTest/DeployAssert/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/EcsDeploymentGroupTest/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "EcsDeploymentGroupTest/DefaultTest/DeployAssert"
+    }
+  }
+}
