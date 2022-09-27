@@ -137,7 +137,7 @@ const deploymentConfig = new codedeploy.EcsDeploymentConfig(stack, 'CanaryConfig
   }),
 });
 
-new codedeploy.EcsDeploymentGroup(stack, 'BlueGreenDG', {
+const dg = new codedeploy.EcsDeploymentGroup(stack, 'BlueGreenDG', {
   alarms: [
     blueUnhealthyHosts,
     blueApiFailure,
@@ -158,8 +158,68 @@ new codedeploy.EcsDeploymentGroup(stack, 'BlueGreenDG', {
   },
 });
 
-new integ.IntegTest(app, 'EcsDeploymentGroupTest', {
+const testCase = new integ.IntegTest(app, 'EcsDeploymentGroupTest', {
   testCases: [stack],
 });
+
+const appSpec = {
+  version: 0,
+  Resources: [
+    {
+      TargetService: {
+        Type: 'AWS::ECS::Service',
+        Properties: {
+          TaskDefinition: taskDefinition2.taskDefinitionArn,
+          LoadBalancerInfo: {
+            ContainerName: 'Container',
+            ContainerPort: 80,
+          },
+          PlatformVersion: 'LATEST',
+          NetworkConfiguration: {
+            awsvpcConfiguration: {
+              assignPublicIp: 'DISABLED',
+              securityGroups: [
+                service.connections.securityGroups[0].securityGroupId,
+              ],
+              subnets: [
+                vpc.privateSubnets[0].subnetId,
+                vpc.privateSubnets[1].subnetId,
+              ],
+            },
+          },
+        },
+      },
+    },
+  ],
+};
+
+// Start a deployment
+const start = testCase.assertions.awsApiCall('CodeDeploy', 'createDeployment', {
+  applicationName: dg.application.applicationName,
+  deploymentGroupName: dg.deploymentGroupName,
+  description: 'AWS CDK integ test',
+  revision: {
+    revisionType: 'AppSpecContent',
+    appSpecContent: {
+      content: JSON.stringify(appSpec),
+    },
+  },
+});
+
+// Describe the deployment
+const describe = testCase.assertions.awsApiCall('CodeDeploy', 'getDeployment', {
+  deploymentId: start.getAttString('deploymentId'),
+});
+
+// Assert the deployment is successful
+describe.expect(integ.ExpectedResult.objectLike({
+  status: 'Succeeded',
+}));
+
+// Additional required perms for CodeDeploy CreateDeployment API call
+const assertionProvider = start.node.tryFindChild('SdkProvider') as integ.AssertionsProvider;
+assertionProvider.addPolicyStatementFromSdkCall('codedeploy', 'GetDeploymentConfig');
+assertionProvider.addPolicyStatementFromSdkCall('codedeploy', 'GetApplicationRevision');
+assertionProvider.addPolicyStatementFromSdkCall('codedeploy', 'RegisterApplicationRevision');
 
 app.synth();
